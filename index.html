@@ -37,26 +37,36 @@ button{
 </style>
 </head>
 <body>
+
 <div class="header">
  <div class="logo">🛡 SENTEX PRO</div>
  <div class="sub">PREMIUM APK SECURITY ENGINE</div>
 </div>
+
 <div class="panel">
- <h3>پنل مدیریت امنیت APK</h3>
- <button class="blue" onclick="send('deep_scan')">اسکن عمیق APK</button>
- <button class="green" onclick="send('threats')">بررسی تهدیدها</button>
- <button class="blue" onclick="send('full_report')">دریافت گزارش کامل</button>
- <button class="yellow" onclick="send('compatibility')">بررسی سازگاری نصب</button>
- <button class="red" onclick="send('sign')">امضای APK</button>
+ <h3>🛡️ مرکز کنترل امنیت</h3>
+
+ <button class="blue" onclick="send('account')">👤 حساب کاربری</button>
+ <button class="green" onclick="send('guide')">📚 راهنمای استفاده</button>
+ <button class="blue" onclick="send('subscription')">💎 وضعیت اشتراک</button>
+ <button class="yellow" onclick="send('purchase')">💳 خرید و تمدید اشتراک</button>
+ <button class="green" onclick="send('referral')">🎁 دعوت دوستان و دریافت امتیاز</button>
+ <button class="red" onclick="send('ticket')">🎫 ارسال تیکت پشتیبانی</button>
+ <button class="blue" onclick="send('support')">💬 ارتباط با پشتیبانی</button>
+ <button class="green" onclick="send('verify')">✅ تأیید عضویت در کانال</button>
 </div>
+
 <div class="status">SENTEX PRO SECURITY SYSTEM</div>
+
 <script>
-const tg=window.Telegram.WebApp;
+const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
+
 function send(action){
  tg.sendData(action);
 }
 </script>
+
 </body>
 </html>
