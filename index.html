@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SENTEX PRO</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:24px 18px;
+ background:#0b1220;color:#fff;
+ font-family:Arial,sans-serif;
+}
+.header{text-align:center;margin:20px 0 30px}
+.logo{font-size:32px;font-weight:900;letter-spacing:2px}
+.sub{color:#91a4c4;font-size:12px;margin-top:9px}
+.panel{
+ background:#141f33;border:1px solid #263651;
+ padding:18px;border-radius:18px;
+}
+h3{margin:0 0 18px;font-size:16px}
+button{
+ width:100%;border:0;border-radius:13px;
+ padding:17px;margin:7px 0;
+ color:white;font-size:15px;font-weight:bold;
+ cursor:pointer;
+}
+.blue{background:#1769c2}
+.green{background:#16834a}
+.red{background:#b52d3a}
+.yellow{background:#98701d}
+.status{
+ text-align:center;color:#91a4c4;
+ font-size:12px;margin-top:22px
+}
+</style>
+</head>
+<body>
+<div class="header">
+ <div class="logo">🛡 SENTEX PRO</div>
+ <div class="sub">PREMIUM APK SECURITY ENGINE</div>
+</div>
+<div class="panel">
+ <h3>پنل مدیریت امنیت APK</h3>
+ <button class="blue" onclick="send('deep_scan')">اسکن عمیق APK</button>
+ <button class="green" onclick="send('threats')">بررسی تهدیدها</button>
+ <button class="blue" onclick="send('full_report')">دریافت گزارش کامل</button>
+ <button class="yellow" onclick="send('compatibility')">بررسی سازگاری نصب</button>
+ <button class="red" onclick="send('sign')">امضای APK</button>
+</div>
+<div class="status">SENTEX PRO SECURITY SYSTEM</div>
+<script>
+const tg=window.Telegram.WebApp;
+tg.ready();
+tg.expand();
+function send(action){
+ tg.sendData(action);
+}
+</script>
+</body>
+</html>
