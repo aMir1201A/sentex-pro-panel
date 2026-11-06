@@ -2,71 +2,486 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>SENTEX PRO</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+ --bg:#020817;
+ --card:rgba(8,25,48,.78);
+ --line:rgba(45,157,255,.45);
+ --blue:#19a7ff;
+ --cyan:#00e5ff;
+ --green:#22e889;
+ --red:#ff3158;
+ --purple:#9b6cff;
+ --gold:#ffc21a;
+ --text:#f4f8ff;
+ --muted:#8da6c8;
+}
+
+html,body{margin:0;min-height:100%;background:var(--bg)}
+
 body{
- margin:0;padding:24px 18px;
- background:#0b1220;color:#fff;
- font-family:Arial,sans-serif;
+ padding:18px 14px 28px;
+ color:var(--text);
+ font-family:Arial,Tahoma,sans-serif;
+ overflow-x:hidden;
+ background:
+ radial-gradient(circle at 50% -10%,rgba(0,119,255,.28),transparent 38%),
+ radial-gradient(circle at 0 55%,rgba(0,229,255,.08),transparent 30%),
+ linear-gradient(180deg,#020817 0%,#041225 55%,#020817 100%);
 }
-.header{text-align:center;margin:20px 0 30px}
-.logo{font-size:32px;font-weight:900;letter-spacing:2px}
-.sub{color:#91a4c4;font-size:12px;margin-top:9px}
-.panel{
- background:#141f33;border:1px solid #263651;
- padding:18px;border-radius:18px;
+
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ opacity:.16;
+ background-image:
+ linear-gradient(rgba(0,140,255,.12) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(0,140,255,.12) 1px,transparent 1px);
+ background-size:34px 34px;
+ mask-image:linear-gradient(to bottom,black,transparent 85%);
 }
-h3{margin:0 0 18px;font-size:16px}
-button{
- width:100%;border:0;border-radius:13px;
- padding:17px;margin:7px 0;
- color:white;font-size:15px;font-weight:bold;
- cursor:pointer;
+
+.wrap{max-width:560px;margin:auto;position:relative;z-index:1}
+
+.top{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin:4px 4px 18px;
 }
-.blue{background:#1769c2}
-.green{background:#16834a}
-.red{background:#b52d3a}
-.yellow{background:#98701d}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:11px;
+}
+
+.brand-icon{
+ width:48px;height:48px;
+ display:grid;place-items:center;
+ border-radius:16px;
+ background:linear-gradient(145deg,#0b315d,#06172d);
+ border:1px solid rgba(30,163,255,.7);
+ box-shadow:0 0 24px rgba(0,145,255,.25);
+ font-size:25px;
+}
+
+.brand-name{
+ font-size:19px;
+ font-weight:900;
+ letter-spacing:1.2px;
+}
+
+.brand-sub{
+ color:#82a0c8;
+ font-size:9px;
+ margin-top:4px;
+ letter-spacing:1px;
+}
+
+.online{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ padding:9px 12px;
+ border:1px solid rgba(38,170,255,.55);
+ border-radius:22px;
+ background:rgba(5,24,47,.75);
+ color:#8fffbf;
+ font-size:11px;
+ font-weight:bold;
+ box-shadow:0 0 18px rgba(0,153,255,.12);
+}
+
+.dot{
+ width:8px;height:8px;
+ border-radius:50%;
+ background:#24ed88;
+ box-shadow:0 0 10px #24ed88;
+}
+
+.hero{
+ position:relative;
+ text-align:center;
+ padding:22px 14px 24px;
+ margin-bottom:16px;
+ border:1px solid rgba(37,160,255,.55);
+ border-radius:27px;
+ background:linear-gradient(145deg,rgba(8,36,69,.92),rgba(3,14,30,.82));
+ box-shadow:
+ 0 0 35px rgba(0,119,255,.14),
+ inset 0 0 35px rgba(0,119,255,.06);
+ overflow:hidden;
+}
+
+.hero:before,.hero:after{
+ content:"";
+ position:absolute;
+ width:110px;height:110px;
+ border-radius:50%;
+ filter:blur(35px);
+ pointer-events:none;
+}
+
+.hero:before{
+ background:rgba(0,137,255,.2);
+ top:-55px;left:-30px;
+}
+
+.hero:after{
+ background:rgba(0,229,255,.12);
+ bottom:-70px;right:-20px;
+}
+
+.shield{
+ width:76px;height:76px;
+ margin:0 auto 9px;
+ display:grid;place-items:center;
+ border-radius:25px;
+ font-size:42px;
+ background:linear-gradient(145deg,#103d70,#06182f);
+ border:1px solid #1ca5ff;
+ box-shadow:0 0 30px rgba(0,158,255,.35);
+}
+
+.hero h1{
+ margin:0;
+ font-size:30px;
+ font-style:italic;
+ letter-spacing:1px;
+}
+
+.hero h1 span{color:#1cb9ff}
+
+.hero p{
+ margin:8px 0 14px;
+ color:#a7bbd7;
+ font-size:12px;
+}
+
+.tag{
+ display:inline-block;
+ padding:9px 23px;
+ border-radius:20px;
+ border:1px solid rgba(20,171,255,.6);
+ background:rgba(2,20,41,.75);
+ color:#aee8ff;
+ font-weight:bold;
+ font-size:13px;
+ box-shadow:0 0 18px rgba(0,157,255,.13);
+}
+
+.user-card{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ padding:15px;
+ margin-bottom:16px;
+ border-radius:22px;
+ border:1px solid rgba(50,158,255,.45);
+ background:var(--card);
+ backdrop-filter:blur(18px);
+ box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+
+.user-info{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ min-width:0;
+}
+
+.avatar{
+ width:48px;height:48px;
+ flex:none;
+ display:grid;place-items:center;
+ border-radius:50%;
+ background:linear-gradient(145deg,#10a9ff,#1454c7);
+ font-size:23px;
+ box-shadow:0 0 20px rgba(0,174,255,.3);
+}
+
+.user-title{font-weight:bold;font-size:14px}
+.user-sub{font-size:10px;color:var(--muted);margin-top:5px}
+
+.premium{
+ flex:none;
+ padding:9px 10px;
+ border-radius:16px;
+ color:#ffe56a;
+ border:1px solid rgba(255,194,26,.55);
+ background:rgba(93,62,0,.25);
+ font-size:10px;
+ font-weight:bold;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+
+.tool{
+ position:relative;
+ min-height:126px;
+ padding:16px 13px;
+ border-radius:22px;
+ border:1px solid rgba(38,160,255,.48);
+ background:linear-gradient(145deg,rgba(10,37,69,.88),rgba(4,18,35,.88));
+ color:#fff;
+ text-align:right;
+ box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 0 25px rgba(0,140,255,.035);
+ transition:.16s;
+ overflow:hidden;
+}
+
+.tool:active{
+ transform:scale(.97);
+ box-shadow:0 0 25px rgba(0,160,255,.25);
+}
+
+.tool-icon{
+ width:50px;height:50px;
+ display:grid;place-items:center;
+ border-radius:17px;
+ margin-bottom:10px;
+ font-size:25px;
+ background:rgba(0,136,255,.13);
+ border:1px solid rgba(37,165,255,.45);
+}
+
+.tool-title{
+ font-size:14px;
+ font-weight:900;
+}
+
+.tool-desc{
+ margin-top:5px;
+ color:#829abd;
+ font-size:9px;
+ line-height:1.5;
+}
+
+.arrow{
+ position:absolute;
+ left:11px;
+ bottom:11px;
+ width:25px;height:25px;
+ display:grid;place-items:center;
+ border-radius:50%;
+ background:#087ad0;
+ font-size:13px;
+}
+
+.green{border-color:rgba(35,232,137,.48)}
+.green .tool-icon{background:rgba(35,232,137,.12);border-color:rgba(35,232,137,.42)}
+.green .arrow{background:#14a965}
+
+.red{border-color:rgba(255,49,88,.52)}
+.red .tool-icon{background:rgba(255,49,88,.12);border-color:rgba(255,49,88,.45)}
+.red .arrow{background:#df2348}
+
+.purple{border-color:rgba(155,108,255,.5)}
+.purple .tool-icon{background:rgba(155,108,255,.12);border-color:rgba(155,108,255,.42)}
+.purple .arrow{background:#7044d8}
+
+.gold{border-color:rgba(255,194,26,.5)}
+.gold .tool-icon{background:rgba(255,194,26,.11);border-color:rgba(255,194,26,.4)}
+.gold .arrow{background:#c98d00}
+
 .status{
- text-align:center;color:#91a4c4;
- font-size:12px;margin-top:22px
+ margin-top:16px;
+ padding:15px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ border-radius:21px;
+ border:1px solid rgba(37,160,255,.45);
+ background:rgba(7,27,51,.82);
+}
+
+.status-item{display:flex;align-items:center;gap:8px;font-size:10px}
+.status-item strong{display:block;font-size:11px;margin-bottom:3px}
+.status-item span{color:#7f99bb}
+
+.status-ok{
+ width:29px;height:29px;
+ display:grid;place-items:center;
+ border-radius:50%;
+ background:rgba(34,232,137,.12);
+ border:1px solid rgba(34,232,137,.5);
+ color:#36ed94;
+}
+
+.footer{
+ margin-top:17px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ color:#7791b3;
+ font-size:9px;
+ text-align:center;
+}
+
+.footer-brand{
+ color:#42baff;
+ font-weight:900;
+ font-size:12px;
+ letter-spacing:1px;
+}
+
+@media(max-width:370px){
+ body{padding:14px 10px 22px}
+ .grid{gap:8px}
+ .tool{min-height:118px;padding:13px 10px}
+ .hero h1{font-size:27px}
+ .premium{font-size:9px}
 }
 </style>
 </head>
+
 <body>
+<div class="wrap">
 
-<div class="header">
- <div class="logo">🛡 SENTEX PRO</div>
- <div class="sub">PREMIUM APK SECURITY ENGINE</div>
+ <div class="top">
+  <div class="brand">
+   <div class="brand-icon">➤</div>
+   <div>
+    <div class="brand-name">SENTEX PRO</div>
+    <div class="brand-sub">PREMIUM APK SECURITY ENGINE</div>
+   </div>
+  </div>
+  <div class="online"><i class="dot"></i> Online</div>
+ </div>
+
+ <section class="hero">
+  <div class="shield">🛡️</div>
+  <h1>SENTEX <span>PRO</span></h1>
+  <p>APK Security • Analysis • Signing</p>
+  <div class="tag">امنیت • قدرت • اعتماد</div>
+ </section>
+
+ <section class="user-card">
+  <div class="user-info">
+   <div class="avatar">👤</div>
+   <div>
+    <div class="user-title">کاربر عزیز ✨</div>
+    <div class="user-sub">به پنل حرفه‌ای SENTEX PRO خوش آمدید!</div>
+   </div>
+  </div>
+  <div class="premium">👑 Premium</div>
+ </section>
+
+ <div class="grid">
+
+  <button class="tool purple" onclick="send('signer')">
+ <div class="tool-icon">✍️</div>
+ <div class="tool-title">مدیریت امضا</div>
+ <div class="tool-desc">امضای حرفه‌ای و سازگار APK</div>
+</button>
+
+<button class="tool" onclick="send('account')">
+   <div class="tool-icon">👤</div>
+   <div class="tool-title">حساب کاربری</div>
+   <div class="tool-desc">مدیریت و مشاهده حساب</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool green" onclick="send('guide')">
+   <div class="tool-icon">📚</div>
+   <div class="tool-title">راهنما و آموزش</div>
+   <div class="tool-desc">آموزش کامل امکانات</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool" onclick="send('subscription')">
+   <div class="tool-icon">💎</div>
+   <div class="tool-title">وضعیت اشتراک</div>
+   <div class="tool-desc">مشاهده وضعیت سرویس</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool gold" onclick="send('purchase')">
+   <div class="tool-icon">💳</div>
+   <div class="tool-title">خرید اشتراک</div>
+   <div class="tool-desc">خرید و تمدید سرویس</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool green" onclick="send('referral')">
+   <div class="tool-icon">🎁</div>
+   <div class="tool-title">دعوت دوستان</div>
+   <div class="tool-desc">دریافت امتیاز و پاداش</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool red" onclick="send('ticket')">
+   <div class="tool-icon">🎫</div>
+   <div class="tool-title">تیکت پشتیبانی</div>
+   <div class="tool-desc">ارسال درخواست پشتیبانی</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool" onclick="send('support')">
+   <div class="tool-icon">💬</div>
+   <div class="tool-title">ارتباط با پشتیبانی</div>
+   <div class="tool-desc">ارتباط مستقیم با پشتیبانی</div>
+   <div class="arrow">←</div>
+  </button>
+
+  <button class="tool green" onclick="send('verify')">
+   <div class="tool-icon">✓</div>
+   <div class="tool-title">تأیید عضویت</div>
+   <div class="tool-desc">بررسی عضویت در کانال</div>
+   <div class="arrow">←</div>
+  </button>
+
+ </div>
+
+ <div class="status">
+  <div class="status-item">
+   <div class="status-ok">✓</div>
+   <div>
+    <strong>سیستم آماده به کار</strong>
+    <span>SENTEX PRO SECURITY SYSTEM</span>
+   </div>
+  </div>
+  <div class="status-item">
+   <div class="status-ok">🛡</div>
+   <div>
+    <strong>امنیت در اولویت</strong>
+    <span>APK ENGINE</span>
+   </div>
+  </div>
+ </div>
+
+ <div class="footer">
+  <span>پشتیبانی: @GIARTiS</span>
+  <span class="footer-brand">SENTEX PRO</span>
+  <span>APK SECURITY</span>
+ </div>
+
 </div>
-
-<div class="panel">
- <h3>🛡️ مرکز کنترل امنیت</h3>
-
- <button class="blue" onclick="send('account')">👤 حساب کاربری</button>
- <button class="green" onclick="send('guide')">📚 راهنمای استفاده</button>
- <button class="blue" onclick="send('subscription')">💎 وضعیت اشتراک</button>
- <button class="yellow" onclick="send('purchase')">💳 خرید و تمدید اشتراک</button>
- <button class="green" onclick="send('referral')">🎁 دعوت دوستان و دریافت امتیاز</button>
- <button class="red" onclick="send('ticket')">🎫 ارسال تیکت پشتیبانی</button>
- <button class="blue" onclick="send('support')">💬 ارتباط با پشتیبانی</button>
- <button class="green" onclick="send('verify')">✅ تأیید عضویت در کانال</button>
-</div>
-
-<div class="status">SENTEX PRO SECURITY SYSTEM</div>
 
 <script>
-const tg = window.Telegram.WebApp;
+const tg=window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
 function send(action){
+ tg.HapticFeedback && tg.HapticFeedback.impactOccurred("light");
  tg.sendData(action);
 }
 </script>
-
 </body>
 </html>
